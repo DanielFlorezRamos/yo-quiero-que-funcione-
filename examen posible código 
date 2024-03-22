@@ -1,0 +1,84 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DanielFlorezRamos/yo-quiero-que-funcione-/blob/main/examen%20posible%20c%C3%B3digo%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "6drpfLDkUZaj"
+      },
+      "outputs": [],
+      "source": [
+        "def fdp(f, mu, sigma):\n",
+        "  return (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((f - mu)**2) / (2 * sigma**2))"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def fpa(f, mu, sigma):\n",
+        "  suma = 0\n",
+        "  for i in range(int(f) + 1):\n",
+        "    suma += fdp(i, mu, sigma)\n",
+        "  return suma"
+      ],
+      "metadata": {
+        "id": "4NOkMEOiUd4O"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "u = 1000\n",
+        "sigma = 300\n",
+        "def filtro_señal(f):\n",
+        "  fpa_valor = fpa(f, u, sigma)\n",
+        "  if fpa_valor >= 0.3:\n",
+        "    return \"La señal pasa el filtro.\"\n",
+        "  else:\n",
+        "    return \"La señal es bloqueada por el filtro.\"\n",
+        "while True:\n",
+        "  frecuencia = float(input(\"Ingrese la frecuencia (en Hz): \"))\n",
+        "  resultado = filtro_señal(frecuencia)\n",
+        "  print(resultado)\n",
+        "  respuesta = input(\"¿Desea ingresar otra frecuencia (si/no)?: \").lower()\n",
+        "  if respuesta == \"no\":\n",
+        "    break\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "eo3zVuYRUhGU"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
